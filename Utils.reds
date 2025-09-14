@@ -1,6 +1,6 @@
 module Skillful.Utils
 import Skillful.Constants.*
 
-public final static func Log(message: String) -> Void {
+public func LogSkillful(message: String) -> Void {
     LogDM(ModDefinition.Name() + ": " + message);
 }

@@ -16,7 +16,6 @@ private final const func GetProficiencyMaxLevel(type: gamedataProficiencyType) -
     let absoluteMinLevel: Int32;
     let originalProficiencyMaxLevel: Int32;
     let proficiencyRec: ref<Proficiency_Record>;
-    let pIndex: Int32 = this.GetProficiencyIndexByType(type);
 
     originalProficiencyMaxLevel = wrappedMethod(type);
 
@@ -26,7 +25,7 @@ private final const func GetProficiencyMaxLevel(type: gamedataProficiencyType) -
     }
     //A value less than -1 is undefined behaviour, so we'll warn the user and send the value on it's way, as it could be for another mod.
     if (originalProficiencyMaxLevel < 0) {
-        Log("GetProficiencyMaxLevel returned an unexpected value: " + IntToString(originalProficiencyMaxLevel) + ". This may have been caused by another mod.");
+        LogSkillful("GetProficiencyMaxLevel returned an unexpected value: " + IntToString(originalProficiencyMaxLevel) + ". This may have been caused by another mod.");
         return originalProficiencyMaxLevel;
     }
     //Count is used to define the the number of actual values in the gamedataProficiencyType enum, and Invalid is used for indicating some sort of error state,
@@ -43,7 +42,7 @@ private final const func GetProficiencyMaxLevel(type: gamedataProficiencyType) -
     //We check that the value is within the min and max bounds for the type, if not, it's likely that another mod is causing this behaviour.
     //As such, we return the original value as we don't want to break someone else's mod.
     if(originalProficiencyMaxLevel < absoluteMinLevel || originalProficiencyMaxLevel > absoluteMaxLevel) {
-        Log("GetProficiencyMaxLevel returned " + IntToString(originalProficiencyMaxLevel) 
+        LogSkillful("GetProficiencyMaxLevel returned " + IntToString(originalProficiencyMaxLevel) 
             + ", which is outside of the bounds of the specified MinLevel and MaxLevel (" 
             + IntToString(absoluteMinLevel) + ", " + IntToString(absoluteMaxLevel) + ") for " + proficiencyRec.DisplayName()
             + ". This may have been caused by another mod.");
